@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- 加载 React。-->
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <!-- 加载babel -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        // 渲染组件
+        class App extends React.Component {
+            constructor(){
+                super();
+                this.state = {
+                    message: "hello world"
+                }
+            };
+            render(){
+                return (
+                    <div>
+                        <h2>{this.state.message}</h2>
+                        <button onClick={this.textChange}>更换文字</button>
+                    </div>
+                )
+            };
+            textChange(){
+                console.log(this)
+                this.setState({
+                    
+                })
+            };
+        }
+        // 展示组件
+        ReactDOM.render(<App/>, document.getElementById("app"));
+    </script>
+</body>
+</html>

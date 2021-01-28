@@ -1,0 +1,36 @@
+安装脚手架
+npm install -g create-react-app
+创建项目
+create-react-app 项目名
+
+
+Success! Created demo at E:\1-A-Roc\Reactzx\02react脚手架\demo
+Inside that directory, you can run several commands:
+成功！已在E:\1-A-Roc\Reactzx\02react架\demo创建演示
+在该目录中，可以运行多个命令：
+
+  npm start
+    Starts the development server. 
+    启动开发服务器。
+
+  npm run build
+    Bundles the app into static files for production. 
+    将应用程序打包成静态文件以供生产使用。
+
+  npm test
+    Starts the test runner. 
+    启动测试运行程序。
+
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+    删除此工具并复制生成依赖项、配置文件
+    并将脚本放入应用程序目录。如果你这样做，你就不能回去了！
+
+We suggest that you begin by typing:
+我们建议您先键入：
+
+  cd demo
+  npm start
+
+Happy hacking!

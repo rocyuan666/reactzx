@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车简易案例</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        table, th, td{
+            border: 1px solid #000;
+        }
+        th, td{
+            padding: 10px 20px;
+        }
+        td span{
+            margin:0 6px;
+        }
+        button{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        // 创建组件
+        class App extends React.Component {
+            constructor(props){
+                super(props)
+                this.state = {
+                    message: "Hello",
+                    navList: ["序号","书名","价格","数量","操作"],
+                    books: [
+                        {
+                            id: 1,
+                            name: "js高级程序设计",
+                            price: 98,
+                            num: 1
+                        },
+                        {
+                            id: 2,
+                            name: "vue从入门到精通",
+                            price: 100,
+                            num: 1
+                        },
+                        {
+                            id: 3,
+                            name: "react编程",
+                            price: 89,
+                            num: 1
+                        },
+                        {
+                            id: 4,
+                            name: "设计模式",
+                            price: 88,
+                            num: 1
+                        }
+                    ],
+                    allPrice: 0
+                }
+            }
+            render(){
+                if(this.state.books.length){
+                    return (
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {
+                                            this.state.navList.map((item, index) => {
+                                                return (
+                                                    <th key={index}>{item}</th>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.books.map((item, index) => {
+                                            return (
+                                                <tr key={item.id}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{item.name}</td>
+                                                    <td>{this.formatPrice(item.price)}</td>
+                                                    <td>
+                                                        <button onClick={e => { this.sub(index) }}>&nbsp;-&nbsp;</button>
+                                                        <span>{item.num}</span>
+                                                        <button onClick={e => { this.add(index) }}>&nbsp;+&nbsp;</button>
+                                                    </td>
+                                                    <td>
+                                                        <button onClick={e => { this.remove(index) }}>移除</button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                            <div>
+                                总价格：{this.formatPrice(this.allPrice())}
+                            </div>
+                        </div>
+                    )
+                }else{
+                    return (
+                        <div>
+                            <h1>购物车为空</h1>
+                        </div>
+                    )
+                }
+            }
+            // 移除
+            remove(index){
+                const books = [...this.state.books];
+                this.setState({
+                    books: books.filter((item, indey) => {
+                        if(index != indey){
+                            return item
+                        }
+                    })
+                })
+            }
+            // 计算总价格
+            allPrice(){
+                let all = 0;
+                for(let book of this.state.books){
+                    all += book.price*book.num
+                }
+                return all
+            }
+            // 价格格式化
+            formatPrice(price){
+                if(typeof price !== "number"){
+                    price = Number(price) || 0
+                }
+                return `¥${price.toFixed(2)}`
+            }
+            // 减少数量
+            sub(index){
+                const books = [...this.state.books];
+                this.setState({
+                    books: books.map((item, indey) => {
+                        if(index == indey && item.num > 1){
+                            item.num -= 1
+                        }
+                        return item
+                    })
+                })
+            }
+            // 增加数量
+            add(index){
+                const books = [...this.state.books]
+                this.setState({
+                    books: books.map((item, indey) => {
+                        if(index == indey){
+                            item.num += 1
+                        }
+                        return item
+                    })
+                })
+            }
+        }
+        ReactDOM.render(
+            <App />,
+            document.getElementById("app")
+        )
+    </script>
+</body>
+</html>
