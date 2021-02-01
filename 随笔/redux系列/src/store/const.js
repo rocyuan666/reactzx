@@ -1,0 +1,2 @@
+export const CHANGE_COUNTER = "CHANGE_COUNTER";
+export const CHANGE_BANNER = "CHANGE_BANNER";
